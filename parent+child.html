@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+    </head>
+    <body>
+        <div id="app">
+            <parent-component>
+            </parent-component>
+        </div>
+    </body>
+    <script src="//cdn.bootcss.com/vue/2.1.6/vue.js"></script>
+    <script>        
+        var Child = Vue.extend({
+            template: '<p>This is a child component!</p>'
+        })        
+        var Parent = Vue.extend({
+            // 在Parent组件内使用<child-component>标签，child标签必须包裹在p内，1.0可以放在p外面，2.0需要放在p内部
+            template :'<p>This is a Parent component!<child-component></child-component></p>',
+            components: {
+                // 局部注册Child组件，并将Child组件的标签设置为<child-component>，Child组件只能在Parent组件内使用
+                'child-component': Child
+            }
+        })
+        
+        // 全局注册Parent组件
+        Vue.component('parent-component', Parent)
+         Vue.component('child-component', Child)
+        new Vue({
+            el: '#app'
+        })
+        
+    </script>
+</html>
+
