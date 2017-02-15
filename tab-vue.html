@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="http://cdn.bootcss.com/vue/2.1.6/vue.js"></script>
+</head>
+
+<body>
+    <div id="mydiv">
+        <ul>
+            <li @click="isShow('xw')" v-bind:class="{active: tabs.xw}">新闻</li>
+            <li @click="isShow('ty')" v-bind:class="{active: tabs.ty}">体育</li>
+            <li @click="isShow('yl')" v-bind:class="{active: tabs.yl}">娱乐</li>
+        </ul>
+        <div class="tabcon" v-show="tabs.xw">111</div>
+        <div class="tabcon" v-show="tabs.ty">222</div>
+        <div class="tabcon" v-show="tabs.yl">333</div>
+    </div>
+    <script>
+    var vm = new Vue({
+        el: "#mydiv",
+        data: {
+            tabs: {
+                yl: true,
+                ty: false,
+                xw: false
+            }
+        },
+        methods: {
+            tabClose: function() {
+                for (var x in vm.tabs) {
+                    vm.tabs[x] = false;
+                }
+            },
+            isShow: function(obj) {
+                vm.tabClose();
+                vm.tabs[obj] = !vm.tabs[obj];
+            }
+        }
+    })
+    </script>
+</body>
+
+</html>
