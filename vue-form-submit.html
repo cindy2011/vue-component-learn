@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="//cdn.bootcss.com/vue/2.1.6/vue.js"></script>
+    <script src="http://cdn.bootcss.com/vue-resource/1.1.0/vue-resource.js"></script>
+</head>
+<body>
+    <div id="app">
+        <form @submit.prevent="submit">
+            姓名
+            <div class="field">
+                <input name="name" type="text" v-model="formdata.name">
+            </div>
+            性別
+            <div class="field">
+                男
+                <input name="gender" type="radio" value="male" v-model="formdata.sex"> 女
+                <input name="gender" type="radio" value="female" v-model="formdata.sex">
+            </div>
+            <input type="submit" value="提交">
+        </form>
+    </div>
+    <script>
+    Vue.http.options.emulateJSON = true;
+    new Vue({
+        el: '#app',
+        data:{
+        	formdata:{
+               name:"",
+               sex:""
+        	}
+        },
+        methods: {
+            submit: function(event) {
+                this.$http.post('zj22.html',this.formdata).then((response) => {
+                    // success callback
+                }, (response) => {
+                    // error callback
+                });
+            }
+        }
+    })
+    </script>
+</body>
+</html>
