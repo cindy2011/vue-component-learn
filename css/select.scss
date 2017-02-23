@@ -1,0 +1,52 @@
+  @function cRem($n) {
+      @return $n*1px;
+  }
+  
+  @mixin wandh($w, $h) {
+      width: cRem($w);
+      height: cRem($h);
+  }
+  ul,li{
+    margin:0;
+    padding:0;
+  }
+  .select-box{
+      @include wandh(297, 50);
+      line-height: cRem(50);
+      background: #8e7e68;
+      color: #fff;
+      font-size: cRem(20);
+      padding-left: cRem(14);
+      box-sizing: border-box;
+      float: left;
+      border-radius: 0;
+      position: relative;
+      span {
+          @include wandh(0, 0);
+          border-top: cRem(10) solid #fff;
+          border-left: cRem(10) solid transparent;
+          border-right: cRem(10) solid transparent;
+          display: block;
+          position: absolute;
+          right: cRem(10);
+          top: cRem(20);
+      }
+      ul {
+          height: cRem(250);
+          // overflow: scroll;
+          position: absolute;
+          top: cRem(50);
+          left: 0;
+          z-index: 5;
+          li {
+              @include wandh(297, 50);
+              line-height: cRem(50);
+              background: #8e7e68;
+              color: #fff;
+              font-size: cRem(20);
+              padding-left: cRem(14);
+              box-sizing: border-box;
+              border-top: cRem(1) solid #B7A48A;
+          }
+      }
+  }

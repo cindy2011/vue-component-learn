@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>联动下拉</title>
+    <script src="http://cdn.bootcss.com/vue/2.1.6/vue.js"></script>
+    <link rel="stylesheet" href="css/select.css">
+</head>
+
+<body>
+    <template id="mySelect">
+        <div class="select-box select-version" @click="showSelectUl"><i class="select-text" v-html="selectText"></i> <span></span>
+            <ul v-show="selectUl">
+                <li v-for="item in selectData" @click.stop="hideSelectUl(item.value,item.text)" v-html="item.text"></li>
+            </ul>
+        </div>
+    </template>
+    <div id="rd1">
+        <my-select v-bind:select-data="selectData" v-on:selchange="selectComChange" ref="selectCom"></my-select>
+        <my-select v-bind:select-data="selectData2" v-on:selchange="selectComChange2" ref="selectCom2"></my-select>
+    </div>
+    <script>
+    Vue.component('my-select', {
+        template: "#mySelect",
+        data: function() {
+            return {
+                selectUl: false,
+                selectValue: "",
+                selectText: "请选择"
+            }
+        },
+        props: ['select-data'],
+        methods: {
+            showSelectUl: function() {
+                this.selectUl = true;
+            },
+            hideSelectUl: function(value, text) {
+                this.selectUl = false;
+                this.selectValue = value;
+                this.selectText = text;
+                this.$emit('selchange'); //事件只能小写
+            }
+        }
+    });
+
+    var vm = new Vue({
+        el: "#rd1",
+        data: {
+            selectData: [{
+                text: 'IOS正版',
+                value: 5002
+            }, {
+                text: '应用宝',
+                value: 2151
+            }, {
+                text: '硬核',
+                value: 2123
+            }, {
+                text: '混服',
+                value: 2102
+            }],
+            selectValue: "",
+            selectText: "请选择",
+            selectData2: [],
+            selectValue2: "",
+            selectText2: "请选择"
+        },
+        methods: {
+            selectComChange: function() {
+                var selectCom = this.$refs.selectCom;
+                this.selectValue = selectCom.selectValue;
+                this.selectText = selectCom.selectText;
+                this.selectData2 = [{
+                    text: '喜洋洋灰太狼',
+                    value: 5002
+                }, {
+                    text: '仙剑奇侠传',
+                    value: 2151
+                }, {
+                    text: '小黄人快跑',
+                    value: 2123
+                }, {
+                    text: '轩辕剑',
+                    value: 2102
+                }];
+
+            },
+            selectComChange2: function() {
+                var selectCom2 = this.$refs.selectCom2;
+                this.selectValue2 = selectCom2.selectValue;
+                this.selectText2 = selectCom2.selectText;
+            }
+        }
+    })
+    </script>
+</body>
+
+</html>
