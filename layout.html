@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="http://cdn.bootcss.com/vue/2.1.6/vue.js"></script>
+</head>
+
+<body>
+    <div id="vueMain">
+        <div class="layoutbg" v-show="layout.layoutbg" v-cloak>
+            <div class="layout-con layoutbg3" v-show="layout.layoutbg3" v-cloak>
+                <a href="javascript:void(0)" class="close" @click="closeLayout"></a>
+            </div>
+            <div class="layout-con layoutbg2" v-show="layout.layoutbg2" v-cloak>
+                <a href="javascript:void(0)" class="close" @click="closeLayout"></a>
+            </div>
+        </div>
+    </div>
+    <script>
+    var vm = new Vue({
+        el: "#vueMain",
+        data: {
+            //弹出框2
+            layout: {
+                layoutbg: false,
+                layoutbg2: false,
+                layoutbg3: false
+            }
+
+        },
+        mounted: function() {
+
+        },
+        methods: {
+            closeLayout: function() {
+                for (var x in this.layout) {
+                    this.layout[x] = false;
+                }
+            },
+            showLayout: function() {
+                this.closeLayout();
+                this.layout.layoutbg = true;
+            }
+        }
+    })
+    </script>
+</body>
+
+</html>
